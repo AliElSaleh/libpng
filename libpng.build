@@ -40,3 +40,9 @@ if debug                   Defines PNG_DEBUG
 Defines                    _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE
 
 if _platform == windows if !no_shared Defines PNG_BUILD_DLL
+
+#PreBuild.Copy              scripts/pnglibconf.h.prebuilt pnglibconf.h
+if _platform != windows    PreBuild.Cmd cp scripts/pnglibconf.h.prebuilt pnglibconf.h
+if _platform == windows    PreBuild.Cmd copy scripts/pnglibconf.h.prebuilt pnglibconf.h
+
+AssertWorkingDirectory .
