@@ -43,6 +43,7 @@ if debug                   Defines PNG_DEBUG
 Defines                    _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE
 if _platform == windows if !no_shared Defines PNG_BUILD_DLL
 
+if _platform != windows    Libraries z
 if _platform == windows    Libraries zlib
 if _platform == windows    LibraryDirectories @(ZLIB_PATH)/bin
 
