@@ -2,7 +2,7 @@ Assembly png
 Type lib
 Version! 1.6.44
 
-Depends zlib @ZLIB_PATH
+if _platform == windows    Depends zlib @ZLIB_PATH
 
 BuildDirectory             bin
 IntermediateDirectory      bin/int
@@ -33,18 +33,18 @@ if _arch == x86|x64        IncludedSourceDirectories intel
 if _arch == mips|mips64    IncludedSourceDirectories mips
 if _arch == loongarch      IncludedSourceDirectories loongarch
 
-if _arch == arm|arm64      Defines PNG_ARM_NEON_OPT=0
-if _arch == powerpc|ppc64  Defines PNG_POWERPC_VSX_OPT=0
+if _arch == arm|arm64      Defines PNG_ARM_NEON_OPT=1
+if _arch == powerpc|ppc64  Defines PNG_POWERPC_VSX_OPT=1
 if _arch == x86|x64        Defines PNG_INTEL_SSE_OPT=%!no_intel_sse
-if _arch == mips|mips64    Defines PNG_MIPS_MSA_OPT=0
-if _arch == loongarch      Defines PNG_LOONGARCH_LSX_OPT=0
+if _arch == mips|mips64    Defines PNG_MIPS_MSA_OPT=1
+if _arch == loongarch      Defines PNG_LOONGARCH_LSX_OPT=1
 
 if debug                   Defines PNG_DEBUG
 Defines                    _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE
 if _platform == windows if !no_shared Defines PNG_BUILD_DLL
 
-Libraries                  zlib
-LibraryDirectories         @(ZLIB_PATH)/bin
+if _platform == windows    Libraries zlib
+if _platform == windows    LibraryDirectories @(ZLIB_PATH)/bin
 
 #PreBuild.Copy              scripts/pnglibconf.h.prebuilt pnglibconf.h
 if _platform != windows    PreBuild.Cmd cp scripts/pnglibconf.h.prebuilt pnglibconf.h
