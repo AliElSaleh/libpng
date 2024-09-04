@@ -3,6 +3,7 @@ Type     lib
 Version  1.6.44
 
 if windows                 Depends zlib @ZLIB_PATH
+if windows                 Depends zlib @ZLIB_PATH
 
 BuildDirectory             bin
 IntermediateDirectory      bin/int
@@ -39,7 +40,6 @@ if x86|x64                 Defines PNG_INTEL_SSE_OPT=%!no_intel_sse
 if mips|mips64             Defines PNG_MIPS_MSA_OPT=1
 if loongarch               Defines PNG_LOONGARCH_LSX_OPT=1
 
-if debug                   Defines PNG_DEBUG
 Defines                    _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE
 if windows if !no_shared   Defines PNG_BUILD_DLL
 
