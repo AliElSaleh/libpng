@@ -3,7 +3,6 @@ Type     lib
 Version  1.6.44
 
 if windows                 Depends zlib @ZLIB_PATH
-if windows                 Depends zlib @ZLIB_PATH
 
 BuildDirectory             bin
 IntermediateDirectory      bin/int
@@ -41,11 +40,12 @@ if mips|mips64             Defines PNG_MIPS_MSA_OPT=1
 if loongarch               Defines PNG_LOONGARCH_LSX_OPT=1
 
 Defines                    _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE
+
+if debug                   Defines PNG_DEBUG
 if windows if !no_shared   Defines PNG_BUILD_DLL
 
 if !windows                Libraries z
-if  windows                Libraries zlib
-if  windows                LibraryDirectories @(ZLIB_PATH)/bin
+if  windows                Libraries zlib ; LibraryDirectories @(ZLIB_PATH)/bin
 
 PreBuild.Copy              scripts/pnglibconf.h.prebuilt pnglibconf.h
 
